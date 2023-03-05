@@ -1,0 +1,17 @@
+$breakpoints: (
+  mobile: 414px,
+  tablet: 1280px,
+  desktop: 1750px,
+);
+
+$mobile-width: map-get($breakpoints, mobile);
+$tablet-width: map-get($breakpoints, tablet);
+$desktop-width: map-get($breakpoints, desktop);
+
+$mobile: map-get($breakpoints, mobile);
+$tablet: map-get($breakpoints, tablet);
+$desktop: map-get($breakpoints, desktop);
+
+@import "node_modules/normalize.scss/normalize.scss";
+@import "global.scss";
+@import "visually-hidden.scss";
