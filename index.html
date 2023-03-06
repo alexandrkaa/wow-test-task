@@ -2,9 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self' localhost https://wows-static-production.wgcdn.co https://vortex.worldofwarships.eu;
+        script-src 'self' localhost 'unsafe-eval';
+        font-src 'self' localhost https://fonts.googleapis.com https://fonts.gstatic.com https://wows-static-production.wgcdn.co http://wows-static-production.wgcdn.co https://vortex.worldofwarships.eu;
+        style-src 'self' 'unsafe-inline' localhost https://cdn.jsdelivr.net https://fonts.googleapis.com;
+        img-src 'self' data: localhost https://wows-static-production.wgcdn.co https://vortex.worldofwarships.eu https://glossary-wows-global.gcdn.co;
+      "
+    />
+    <link
+      rel="preload"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/assets/4b8b4b377e8cb358cf886d13c7bb287c.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/assets/b0b1845ecce8ab6a503971e808a8409c.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/assets/54a91b0619ccf9373d525109268219dc.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/favicon.png"
+      rel="icon"
+      type="image/x-icon"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/apple_52.png"
+      sizes="52x52"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/apple_76.png"
+      sizes="76x76"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/apple_120.png"
+      sizes="120x120"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/apple_167.png"
+      sizes="167x167"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://wows-static-production.wgcdn.co/wowsp/dc25575e/images/apple_180.png"
+      sizes="180x180"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Модели кораблей | World of Warships</title>
   </head>
   <body>
     <div id="root"></div>

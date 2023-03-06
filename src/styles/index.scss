@@ -15,3 +15,4 @@ $desktop: map-get($breakpoints, desktop);
 @import "node_modules/normalize.scss/normalize.scss";
 @import "global.scss";
 @import "visually-hidden.scss";
+@import "loader.scss";

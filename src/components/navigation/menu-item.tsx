@@ -1,15 +1,16 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
 
 type Props = {
-  link: Location;
-  title: String;
+  link: string;
+  title: string;
 };
 
 const MenuItem: FC<Props> = (props) => {
   return (
-    <li>
-      <Link to={props.link}>{props.title}</Link>
+    <li className="menu-list__item">
+      <a className="menu-list__item-link" href={props.link}>
+        {props.title}
+      </a>
     </li>
   );
 };
