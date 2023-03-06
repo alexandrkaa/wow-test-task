@@ -1,10 +1,7 @@
 export const ApiConfig = {
   BASE_API_URL: `https://vortex.worldofwarships.eu/api`,
-  // BASE_API_URL: `https://jsonplaceholder.typicode.com`,
   API_REQUEST_TIMEOUT: 10000,
 };
-
-// encyclopedia/en/vehicles/
 
 export const NetworkErrors = {
   UNAUTHORIZED: 401,

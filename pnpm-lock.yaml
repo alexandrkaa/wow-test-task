@@ -14,7 +14,6 @@ specifiers:
   react-dom: 18.2.0
   react-loader-spinner: ^5.3.4
   react-modal: ^3.16.1
-  react-paginate: ^8.1.4
   react-redux: ^8.0.5
   redux: ^4.2.1
   redux-thunk: ^2.4.2
@@ -31,7 +30,6 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-loader-spinner: 5.3.4_biqbaboplfbrettd7655fr4n2y
   react-modal: 3.16.1_biqbaboplfbrettd7655fr4n2y
-  react-paginate: 8.1.4_react@18.2.0
   react-redux: 8.0.5_r7hvvldj6g2s5chfsdsflfq664
   redux: 4.2.1
   redux-thunk: 2.4.2_redux@4.2.1
@@ -1106,15 +1104,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-lifecycles-compat: 3.0.4
       warning: 4.0.3
-    dev: false
-
-  /react-paginate/8.1.4_react@18.2.0:
-    resolution: {integrity: sha512-c3rxjcTEqeDQa6LqXifxLeFguY2qy2CHGRphVjHLFFMGfIHyaJ+v3bOvIlLYEeohwQ1q+cQpknjsqBVrkc/SNA==}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-    dependencies:
-      prop-types: 15.8.1
-      react: 18.2.0
     dev: false
 
   /react-redux/8.0.5_r7hvvldj6g2s5chfsdsflfq664:
