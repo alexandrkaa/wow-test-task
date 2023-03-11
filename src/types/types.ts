@@ -1,23 +1,27 @@
-export type TLangList = {
-  ru: string;
-  fr?: string;
-  en?: string;
-  nl?: string;
-  th?: string;
-  pt_br?: string;
-  zh_cn?: string;
-  ko?: string;
-  de?: string;
-  tr?: string;
-  it?: string;
-  zh_sg?: string;
-  uk?: string;
-  es?: string;
-  cs?: string;
-  es_mx?: string;
-  ja?: string;
-  pl?: string;
-  zh_tw?: string;
+export enum Langs {
+  ru = "ru",
+  fr = "fr",
+  en = "en",
+  nl = "nl",
+  th = "th",
+  pt_br = "pt_br",
+  zh_cn = "zh_cn",
+  ko = "ko",
+  de = "de",
+  tr = "tr",
+  it = "it",
+  zh_sg = "zh_sg",
+  uk = "uk",
+  es = "es",
+  cs = "cs",
+  es_mx = "es_mx",
+  ja = "ja",
+  pl = "pl",
+  zh_tw = "zh_tw",
+}
+export type TLang = keyof typeof Langs;
+export type TLangLocalization = {
+  [key in Langs]: string;
 };
 
 export type TShip = {
@@ -39,9 +43,9 @@ export type TShip = {
   };
   tags: string[];
   localization: {
-    shortmark: TLangList;
-    description: TLangList;
-    mark: TLangList;
+    shortmark: TLangLocalization;
+    description: TLangLocalization;
+    mark: TLangLocalization;
   };
   nation?: string;
 };
