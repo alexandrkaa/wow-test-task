@@ -4,12 +4,12 @@ import { TShips, TShip } from "../types/types";
 import { TResponse } from "../api/ships-api";
 import { StoreLoading } from "./consts";
 
-type TSipsSore = {
+type TSipsStore = {
   data: TShip[] | null;
   loading: string;
 };
 
-const initialState: TSipsSore = {
+const initialState: TSipsStore = {
   data: null,
   loading: "idle",
 };
@@ -48,5 +48,8 @@ export const shipsSlice = createSlice({
     });
   },
 });
+
+export const selectShips = (state: TSipsStore) => state.data;
+export const selectStatus = (state: TSipsStore) => state.loading;
 
 export default shipsSlice.reducer;
