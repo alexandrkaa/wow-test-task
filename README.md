@@ -24,14 +24,17 @@ npm run build
 ## Используемые инструменты
 
 1. React
-
 2. Redux + toolkit
-
 3. Axios
-
 4. react-modal
-
 5. react-loader-spinner
+
+## Backend API endpoints
+
+- https://vortex.worldofwarships.eu/api/encyclopedia/en/vehicles
+- https://vortex.worldofwarships.eu/api/encyclopedia/en/nations
+- https://vortex.worldofwarships.eu/api/encyclopedia/en/vehicle_types_common
+- https://vortex.worldofwarships.eu/api/encyclopedia/en/media_path
 
 ## Реализованный функционал
 
@@ -43,5 +46,5 @@ npm run build
 ## TODO
 
 1. Паджинация
-2. Запрос моделей частями (про тех возможности API)
+2. Запрос моделей частями (при тех возможности API)
 3. Настройка Docker-контейнера для установки приложения
