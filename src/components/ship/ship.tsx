@@ -12,7 +12,7 @@ type TProps = {
 const Ship: FC<TProps> = ({ img, name, nation, description }) => {
   return (
     <figure className="ship">
-      {img && <img src={`${BASE_IMG_URL}/${img}`} alt={`Миниатюрное изображение корабля ${name}`} />}
+      {img && <img src={`${BASE_IMG_URL}/${img}`} alt={`Миниатюрное изображение корабля ${name}`} loading="lazy" />}
       <figcaption>
         {name && <p>Наименование: {name}</p>}
         {nation && <p>Страна: {nation}</p>}

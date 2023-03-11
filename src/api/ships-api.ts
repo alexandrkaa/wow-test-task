@@ -1,8 +1,7 @@
 import createAPI from "./create-api";
-const api = createAPI();
-import { AxiosResponse } from "axios";
-
 import { TShip } from "../types/types";
+
+const api = createAPI();
 
 export type TResponse = {
   status: string;

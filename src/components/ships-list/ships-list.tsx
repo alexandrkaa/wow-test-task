@@ -4,18 +4,19 @@ import { Bars } from "react-loader-spinner";
 import "./ships-list.scss";
 import ShipCard from "../ship-card/ship-card";
 import Ship from "../ship/ship";
-import { fetchShips } from "../../store/ships-slice";
+import { fetchShips, selectShips, selectStatus } from "../../store/ships-slice";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { StoreLoading } from "../../store/consts";
+import { APP_ELEMENT_ID } from "../../consts/consts";
 import { TShip } from "../../types/types";
 
 const ShipsList: FC = () => {
   const [modalIsOpen, changeModal] = useState<boolean>(false);
   const [ship, setShip] = useState<TShip | null>(null);
   const dispatch = useAppDispatch();
-  let ships = useAppSelector((state) => state.ships.data);
+  const ships = useAppSelector((state) => selectShips(state.ships));
+  const status = useAppSelector((state) => selectStatus(state.ships));
 
-  const status = useAppSelector((state) => state.ships.loading);
   useEffect(() => {
     const promise = dispatch(fetchShips());
     return () => {
@@ -44,7 +45,7 @@ const ShipsList: FC = () => {
     return (
       <>
         <Modal
-          appElement={document.getElementById("root") as HTMLElement}
+          appElement={document.getElementById(APP_ELEMENT_ID) as HTMLElement}
           isOpen={modalIsOpen}
           style={customStyles}
           onRequestClose={closeModal}
