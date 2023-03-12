@@ -15,8 +15,10 @@ specifiers:
   prettier: ^2.8.4
   react: 18.2.0
   react-dom: 18.2.0
+  react-intersection-observer: ^9.4.3
   react-loader-spinner: ^5.3.4
   react-modal: ^3.16.1
+  react-paginate: ^8.1.4
   react-redux: ^8.0.5
   redux: ^4.2.1
   redux-thunk: ^2.4.2
@@ -31,8 +33,10 @@ dependencies:
   normalize.scss: 0.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-intersection-observer: 9.4.3_react@18.2.0
   react-loader-spinner: 5.3.4_biqbaboplfbrettd7655fr4n2y
   react-modal: 3.16.1_biqbaboplfbrettd7655fr4n2y
+  react-paginate: 8.1.4_react@18.2.0
   react-redux: 8.0.5_r7hvvldj6g2s5chfsdsflfq664
   redux: 4.2.1
   redux-thunk: 2.4.2_redux@4.2.1
@@ -1606,6 +1610,14 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-intersection-observer/9.4.3_react@18.2.0:
+    resolution: {integrity: sha512-WNRqMQvKpupr6MzecAQI0Pj0+JQong307knLP4g/nBex7kYfIaZsPpXaIhKHR+oV8z+goUbH9e10j6lGRnTzlQ==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -1644,6 +1656,15 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       react-lifecycles-compat: 3.0.4
       warning: 4.0.3
+    dev: false
+
+  /react-paginate/8.1.4_react@18.2.0:
+    resolution: {integrity: sha512-c3rxjcTEqeDQa6LqXifxLeFguY2qy2CHGRphVjHLFFMGfIHyaJ+v3bOvIlLYEeohwQ1q+cQpknjsqBVrkc/SNA==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react-redux/8.0.5_r7hvvldj6g2s5chfsdsflfq664:

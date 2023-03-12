@@ -4,7 +4,7 @@ import { Langs } from "../../types/types";
 type Props = {
   className: string;
   title: Langs | string;
-  onClick: () => void;
+  onClick?: (evt: React.MouseEvent<HTMLElement>) => void;
 };
 
 const Button: FC<Props> = (props) => {

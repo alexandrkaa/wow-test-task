@@ -14,3 +14,12 @@ export const ModalCustomStyles = {
   },
   overlay: { zIndex: 1000 },
 };
+
+export const SecondMenuTypes = {
+  lang: `lang`,
+  types: `types`,
+  lvl: `lvl`,
+  nation: `nation`,
+};
+
+export const PAGINATOR_ITEMS_PER_PAGE = 30;

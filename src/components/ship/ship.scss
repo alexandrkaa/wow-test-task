@@ -26,13 +26,16 @@
   }
 }
 
-.ship__nation {
+.ship__nation,
+.ship__name,
+.ship-nation {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.ship__nation-img {
+.ship__nation-img,
+.nation-img-small {
   display: inline-block;
   margin-left: 5px;
 }

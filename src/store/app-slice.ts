@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TLang, Langs, TLangKeyCode } from "../types/types";
 
-type TAppStore = {
+export type TAppStore = {
   lang: TLang;
   curNation: string;
+  curLevel: number;
+  curType: string;
 };
 
 let startLang = "en" as TLangKeyCode,
@@ -17,9 +19,11 @@ for (const ln in Langs) {
   }
 }
 
-const initialState: TAppStore = {
+export const initialState: TAppStore = {
   lang: startLang,
   curNation: ``,
+  curLevel: 0,
+  curType: ``,
 };
 
 export const appSlice = createSlice({
@@ -37,11 +41,32 @@ export const appSlice = createSlice({
     resetNation: (state) => {
       state.curNation = ``;
     },
+
+    setLevel: (state, action) => {
+      state.curLevel = action.payload;
+    },
+
+    resetLevel: (state) => {
+      state.curLevel = 0;
+    },
+
+    setType: (state, action) => {
+      state.curType = action.payload;
+    },
+
+    resetType: (state) => {
+      state.curType = ``;
+    },
+
+    resetAll: (state) => {
+      state.curLevel = 0;
+      state.curNation = ``;
+      state.curType = ``;
+    },
   },
 });
 
 export const selectLang = (state: TAppStore) => state.lang;
-export const selectCurNation = (state: TAppStore) => state.curNation;
-export const { setLang, setNation, resetNation } = appSlice.actions;
+export const { setLang, setNation, resetNation, setLevel, resetLevel, setType, resetType, resetAll } = appSlice.actions;
 
 export default appSlice.reducer;

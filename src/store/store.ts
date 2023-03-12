@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import shipsReducer, { fetchShips } from "./ships-slice";
 import appReducer from "./app-slice";
+import shipsReducer, { fetchShips } from "./ships-slice";
+import shipTypesReducer, { fetchShipTypes } from "./types-slice";
 import nationsReducer, { fetchNations } from "./nation-slice";
 
 const store = configureStore({
   reducer: {
-    ships: shipsReducer,
     app: appReducer,
+    ships: shipsReducer,
     nations: nationsReducer,
+    shipTypes: shipTypesReducer,
   },
 });
 
@@ -19,6 +21,7 @@ const useAppDispatch = () => useDispatch<typeof store.dispatch>();
 
 store.dispatch(fetchShips());
 store.dispatch(fetchNations());
+store.dispatch(fetchShipTypes());
 
 export { useAppDispatch };
 export default store;

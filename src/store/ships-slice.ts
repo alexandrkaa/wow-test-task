@@ -1,16 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { shipsAPI } from "../api/ships-api";
 import { TShip, TStore } from "../types/types";
-import { TResponse } from "../api/ships-api";
+import { TShipsResponse } from "../api/ships-api";
 import { StoreLoading } from "./consts";
 
 export type TShipsStore = {
   data: TShip[] | null;
+  lvls: number[];
 } & TStore;
+
+// TShipTypesResponse
 
 const initialState: TShipsStore = {
   data: null,
   loading: "idle",
+  lvls: [],
 };
 
 export const fetchShips = createAsyncThunk("ships/fetch", async (_, thunkAPI) => {
@@ -29,13 +33,14 @@ export const shipsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchShips.fulfilled, (state, action) => {
-      const data = action.payload as TResponse;
+      const data = action.payload as TShipsResponse;
       const keys = Object.keys(data.data);
       state.data = keys.map((key) => {
         const ship = data.data[key as unknown as number];
         ship.id = key;
         return ship;
       });
+      state.lvls = Array.from(new Set(state.data.map((it) => it.level))).sort((a, b) => a - b);
       state.loading = StoreLoading.SUCCEED;
     });
     builder.addCase(fetchShips.pending, (state) => {
@@ -48,6 +53,6 @@ export const shipsSlice = createSlice({
 });
 
 export const selectShips = (state: TShipsStore) => state.data;
-// export const selectStatus = (state: TShipsStore) => state.loading;
+export const selectShipLevels = (state: TShipsStore) => state.lvls;
 
 export default shipsSlice.reducer;

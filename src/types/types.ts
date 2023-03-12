@@ -54,6 +54,7 @@ export type TNations = {
 };
 
 export type TNationData = {
+  nationId: string;
   flagTiny?: string;
   flagSmall?: string;
   flagLarge?: string;
@@ -93,6 +94,8 @@ export type TShipData = {
   nation?: string | TNationData;
   description?: string;
   tags?: string[];
+  level?: number;
+  type?: string | TShipTypeData;
 };
 
 export type TShip = {
@@ -119,14 +122,39 @@ export enum ShipTypesImg {
   normal = "normal",
 }
 
+export type TShipTypeImgSizes = {
+  [key in keyof typeof ShipTypesImg]?: string;
+};
+
 export type TShipType = {
-  [key: string]: {
-    icons: ShipTypesImg;
-    sort_order: number;
-    localization: {
-      shortmark?: TLangLocalization;
-      mark?: TLangLocalization;
-    };
-    name: string;
+  icons: TShipTypeImgSizes;
+  sort_order: number;
+  localization: {
+    shortmark?: TLangLocalization;
+    mark?: TLangLocalization;
   };
+  name: string;
+};
+
+export type TShipTypes = {
+  [key: string]: TShipType;
+};
+
+export type TShipTypeData = {
+  icon?: string;
+  sortOrder?: number;
+  title?: string;
+  name?: string;
+};
+
+export const isFullNation = (nation: string | TNationData | undefined): nation is TNationData => {
+  if (nation === undefined) return false;
+  if (typeof nation === `string`) return false;
+  return true;
+};
+
+export const isFullShipType = (type: string | TShipTypeData | undefined): type is TShipTypeData => {
+  if (type === undefined) return false;
+  if (typeof type === `string`) return false;
+  return true;
 };

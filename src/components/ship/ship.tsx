@@ -1,6 +1,7 @@
 import { FC, memo, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import "./ship.scss";
-import { TShip, TShipData, ShipsImgSizes, TNation, TNationData } from "../../types/types";
+import { TShip, TShipData, ShipsImgSizes, isFullNation, isFullShipType } from "../../types/types";
 import Img from "../img/img";
 
 type TProps = {
@@ -11,8 +12,12 @@ type TProps = {
 };
 
 const Ship: FC<TProps> = ({ ship, size, getShipData, imgClick }) => {
+  const { ref, inView, entry } = useInView({
+    triggerOnce: true,
+    threshold: 0,
+  });
   const [flagVisible, setFlagVisible] = useState<boolean>(false);
-  const { img, shortMark, mark, nation, description, tags } = getShipData(ship, size);
+  const { img, shortMark, mark, nation, description, tags, level, type } = getShipData(ship, size);
   const name = shortMark || mark;
   const onMouseOver = (evt: React.MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
@@ -24,24 +29,20 @@ const Ship: FC<TProps> = ({ ship, size, getShipData, imgClick }) => {
     setFlagVisible(false);
   };
 
-  const isFullNation = (nation: string | TNationData | undefined): nation is TNationData => {
-    if (nation === undefined) {
-      return false;
-    }
-
-    if (typeof nation === `string`) {
-      return false;
-    }
-
-    return true;
-  };
-
   const useFlag = size === `small` && flagVisible && isFullNation(nation);
-  // const useFlag = true;
+  let shipType: string | undefined, shipTypeIcon: string | undefined;
+  if (isFullShipType(type)) {
+    shipType = type.title;
+    shipTypeIcon = type.icon;
+  } else {
+    if (Array.isArray(tags)) {
+      shipType = tags[0];
+    }
+  }
 
   return (
-    <figure className={`ship ship--${size}`}>
-      {img && (
+    <figure ref={ref} className={`ship ship--${size}`}>
+      {inView && img && (
         <>
           <Img
             imgClick={imgClick}
@@ -62,12 +63,17 @@ const Ship: FC<TProps> = ({ ship, size, getShipData, imgClick }) => {
         </>
       )}
       <figcaption>
-        {name && <p>{name}</p>}
+        {name && (
+          <p className="ship__name">
+            {shipTypeIcon && <Img src={shipTypeIcon} alt={`Icon of ${name} ship type`} />}
+            {name} / {shipType} / {level}
+          </p>
+        )}
         {typeof nation === "string" && <p>{nation}</p>}
         {typeof nation !== "string" && (
-          <p className="ship__nation">
+          <p className="ship__nation ship-nation">
             <span>{nation?.nationTitle}</span>
-            {nation?.flagTiny && (
+            {inView && nation?.flagTiny && (
               <Img
                 className="ship__nation-img"
                 src={nation.flagTiny}
