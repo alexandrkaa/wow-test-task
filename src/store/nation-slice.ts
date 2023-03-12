@@ -1,0 +1,50 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { nationsAPI, TResponse } from "../api/nation-api";
+import { TNation, TNations } from "../types/types";
+import { StoreLoading } from "./consts";
+
+type TNationsStore = {
+  data: TNations | null;
+  loading: string;
+};
+
+const initialState: TNationsStore = {
+  data: null,
+  loading: "idle",
+};
+
+export const fetchNations = createAsyncThunk("nations/fetch", async (_, thunkAPI) => {
+  const response = await nationsAPI.getNations();
+  return response;
+});
+
+export const nationsSlice = createSlice({
+  name: "nations",
+  initialState,
+  reducers: {
+    clearNations: (state) => {
+      state.data = null;
+      state.loading = StoreLoading.IDLE;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchNations.fulfilled, (state, action) => {
+      const data = action.payload as TResponse;
+      state.data = data.data;
+      state.loading = StoreLoading.SUCCEED;
+    });
+    builder.addCase(fetchNations.pending, (state) => {
+      state.loading = StoreLoading.PENDING;
+    });
+    builder.addCase(fetchNations.rejected, (state) => {
+      state.loading = StoreLoading.FAILED;
+    });
+  },
+});
+
+export const selectNations = (state: TNationsStore): TNations | null => state.data;
+export const selectNation = (state: TNationsStore, nation: string): TNation | undefined =>
+  selectNations(state)?.[nation];
+export const selectStatus = (state: TNationsStore) => state.loading;
+
+export default nationsSlice.reducer;

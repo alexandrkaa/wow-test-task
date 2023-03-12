@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { shipsAPI } from "../api/ships-api";
-import { TShips, TShip } from "../types/types";
+import { TShip } from "../types/types";
 import { TResponse } from "../api/ships-api";
 import { StoreLoading } from "./consts";
 
-type TSipsStore = {
+type TShipsStore = {
   data: TShip[] | null;
   loading: string;
 };
 
-const initialState: TSipsStore = {
+const initialState: TShipsStore = {
   data: null,
   loading: "idle",
 };
@@ -44,12 +44,11 @@ export const shipsSlice = createSlice({
     });
     builder.addCase(fetchShips.rejected, (state) => {
       state.loading = StoreLoading.FAILED;
-      // TODO: записывать ошибку
     });
   },
 });
 
-export const selectShips = (state: TSipsStore) => state.data;
-export const selectStatus = (state: TSipsStore) => state.loading;
+export const selectShips = (state: TShipsStore) => state.data;
+export const selectStatus = (state: TShipsStore) => state.loading;
 
 export default shipsSlice.reducer;

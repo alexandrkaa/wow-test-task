@@ -1,18 +1,11 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 type Props = {
-  link: string;
-  title: string;
+  children: ReactNode;
 };
 
 const MenuItem: FC<Props> = (props) => {
-  return (
-    <li className="menu-list__item">
-      <a className="menu-list__item-link" href={props.link}>
-        {props.title}
-      </a>
-    </li>
-  );
+  return <li className="menu-list__item">{props.children}</li>;
 };
 
 export default MenuItem;

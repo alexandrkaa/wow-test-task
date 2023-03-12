@@ -1,21 +1,22 @@
 import { FC } from "react";
-import { BASE_IMG_URL } from "../../consts/consts";
 import "./ship.scss";
+import { TShip, TShipData, ShipsImgSizes } from "../../types/types";
 
 type TProps = {
-  img?: string;
-  name?: string;
-  nation?: string;
-  description?: string;
+  ship: TShip;
+  size: ShipsImgSizes;
+  getShipData: (ship: TShip, size: ShipsImgSizes) => TShipData;
 };
 
-const Ship: FC<TProps> = ({ img, name, nation, description }) => {
+const Ship: FC<TProps> = ({ ship, size, getShipData }) => {
+  const { img, shortMark, mark, nation, description } = getShipData(ship, size);
+  const name = shortMark || mark;
   return (
-    <figure className="ship">
-      {img && <img src={`${BASE_IMG_URL}/${img}`} alt={`Миниатюрное изображение корабля ${name}`} loading="lazy" />}
+    <figure className={`ship ship--${size}`}>
+      {img && <img src={img} alt={`Миниатюрное изображение корабля ${name}`} loading="lazy" />}
       <figcaption>
-        {name && <p>Наименование: {name}</p>}
-        {nation && <p>Страна: {nation}</p>}
+        {name && <p>{name}</p>}
+        {typeof nation === "string" && <p>{nation}</p>}
         {description && <p>{description}</p>}
       </figcaption>
     </figure>
