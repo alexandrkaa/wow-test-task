@@ -12,4 +12,5 @@ export const ModalCustomStyles = {
     transform: "translate(-50%, -50%)",
     maxWidth: "50%",
   },
+  overlay: { zIndex: 1000 },
 };

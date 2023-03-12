@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Langs } from "../../types/types";
 
 type Props = {
@@ -16,4 +16,4 @@ const Button: FC<Props> = (props) => {
   );
 };
 
-export default Button;
+export default memo(Button);

@@ -1,11 +1,11 @@
 import createAPI from "./create-api";
-import { TNations } from "../types/types";
+import { TNation } from "../types/types";
 
 const api = createAPI();
 
 export type TResponse = {
   status: string;
-  data: TNations;
+  data: TNation[];
 };
 
 export class nationsAPI {

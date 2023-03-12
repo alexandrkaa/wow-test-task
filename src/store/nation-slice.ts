@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { nationsAPI, TResponse } from "../api/nation-api";
-import { TNation, TNations } from "../types/types";
+import { TNation, TNations, TStore } from "../types/types";
 import { StoreLoading } from "./consts";
 
-type TNationsStore = {
+export type TNationsStore = {
   data: TNations | null;
-  loading: string;
-};
+} & TStore;
 
 const initialState: TNationsStore = {
   data: null,
@@ -29,8 +28,15 @@ export const nationsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchNations.fulfilled, (state, action) => {
-      const data = action.payload as TResponse;
-      state.data = data.data;
+      const data = (action.payload as TResponse)?.data;
+      let mapped;
+      if (Array.isArray(data)) {
+        mapped = data.reduce((acc, curr) => {
+          acc[curr.name] = curr;
+          return acc;
+        }, {} as TNations);
+      }
+      state.data = mapped as TNations;
       state.loading = StoreLoading.SUCCEED;
     });
     builder.addCase(fetchNations.pending, (state) => {
@@ -45,6 +51,6 @@ export const nationsSlice = createSlice({
 export const selectNations = (state: TNationsStore): TNations | null => state.data;
 export const selectNation = (state: TNationsStore, nation: string): TNation | undefined =>
   selectNations(state)?.[nation];
-export const selectStatus = (state: TNationsStore) => state.loading;
+// export const selectStatus = (state: TNationsStore) => state.loading;
 
 export default nationsSlice.reducer;

@@ -3,7 +3,7 @@ import { TLang, Langs, TLangKeyCode } from "../types/types";
 
 type TAppStore = {
   lang: TLang;
-  nation: string;
+  curNation: string;
 };
 
 let startLang = "en" as TLangKeyCode,
@@ -19,7 +19,7 @@ for (const ln in Langs) {
 
 const initialState: TAppStore = {
   lang: startLang,
-  nation: ``,
+  curNation: ``,
 };
 
 export const appSlice = createSlice({
@@ -31,17 +31,17 @@ export const appSlice = createSlice({
     },
 
     setNation: (state, action) => {
-      state.nation = action.payload;
+      state.curNation = action.payload;
     },
 
     resetNation: (state) => {
-      state.nation = ``;
+      state.curNation = ``;
     },
   },
 });
 
 export const selectLang = (state: TAppStore) => state.lang;
-export const selectNation = (state: TAppStore) => state.nation;
+export const selectCurNation = (state: TAppStore) => state.curNation;
 export const { setLang, setNation, resetNation } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, memo } from "react";
 import "./main-header.scss";
 
 type Props = {
@@ -13,4 +13,4 @@ const Header: FC<Props> = (props) => {
   );
 };
 
-export default Header;
+export default memo(Header);

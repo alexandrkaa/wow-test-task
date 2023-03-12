@@ -16,4 +16,10 @@ export class shipsAPI {
       return response.data;
     });
   }
+
+  static async getShipTypes(): Promise<unknown> {
+    return api.get<TResponse>(`/encyclopedia/en/vehicle_types_common/`).then((response) => {
+      return response.data;
+    });
+  }
 }

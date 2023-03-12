@@ -17,8 +17,8 @@ export type AppDispatch = typeof store.dispatch;
 
 const useAppDispatch = () => useDispatch<typeof store.dispatch>();
 
-const promiseShips = store.dispatch(fetchShips());
-const promiseNations = store.dispatch(fetchNations());
+store.dispatch(fetchShips());
+store.dispatch(fetchNations());
 
 export { useAppDispatch };
 export default store;

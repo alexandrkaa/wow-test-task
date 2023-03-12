@@ -3,15 +3,20 @@ import Header from "../../components/header/header";
 import Navigation from "../../components/navigation/navigation";
 import Logo from "../../components/Logo/logo";
 import ShipsContainer from "../../components/ships-container/ships-container";
+import ErrorBoundary from "../../components/error-boundry/error-boundry";
 
 const MainPage: FC = () => {
   return (
     <>
       <Header>
         <Logo />
-        <Navigation />
+        <ErrorBoundary>
+          <Navigation />
+        </ErrorBoundary>
       </Header>
-      <ShipsContainer />
+      <ErrorBoundary>
+        <ShipsContainer />
+      </ErrorBoundary>
     </>
   );
 };

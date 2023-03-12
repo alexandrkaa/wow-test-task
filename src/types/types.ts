@@ -1,3 +1,7 @@
+export type TStore = {
+  loading: string;
+};
+
 export enum Langs {
   ru = "ru",
   fr = "fr",
@@ -36,7 +40,7 @@ export type TNationImgSizes = {
 
 export type TNation = {
   name: string;
-  icons: NationImgSizes;
+  icons: TNationImgSizes;
   color: number;
   tags: string[];
   localization: {
@@ -47,6 +51,13 @@ export type TNation = {
 
 export type TNations = {
   [key: string]: TNation;
+};
+
+export type TNationData = {
+  flagTiny?: string;
+  flagSmall?: string;
+  flagLarge?: string;
+  nationTitle?: string;
 };
 
 export enum ShipsImgSizes {
@@ -76,11 +87,12 @@ export type TShipImgSizes = {
 };
 
 export type TShipData = {
-  img: string;
-  shortMark: string | undefined;
-  mark: string | undefined;
-  nation: string | undefined | TNation;
-  description: string | undefined;
+  img?: string;
+  shortMark?: string;
+  mark?: string;
+  nation?: string | TNationData;
+  description?: string;
+  tags?: string[];
 };
 
 export type TShip = {
@@ -98,3 +110,23 @@ export type TShip = {
 };
 
 export type TShips = TShip[];
+
+export enum ShipTypesImg {
+  default = "default",
+  elite = "elite",
+  premium = "premium",
+  special = "special",
+  normal = "normal",
+}
+
+export type TShipType = {
+  [key: string]: {
+    icons: ShipTypesImg;
+    sort_order: number;
+    localization: {
+      shortmark?: TLangLocalization;
+      mark?: TLangLocalization;
+    };
+    name: string;
+  };
+};

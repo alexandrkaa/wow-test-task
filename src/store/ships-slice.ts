@@ -1,13 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { shipsAPI } from "../api/ships-api";
-import { TShip } from "../types/types";
+import { TShip, TStore } from "../types/types";
 import { TResponse } from "../api/ships-api";
 import { StoreLoading } from "./consts";
 
-type TShipsStore = {
+export type TShipsStore = {
   data: TShip[] | null;
-  loading: string;
-};
+} & TStore;
 
 const initialState: TShipsStore = {
   data: null,
@@ -49,6 +48,6 @@ export const shipsSlice = createSlice({
 });
 
 export const selectShips = (state: TShipsStore) => state.data;
-export const selectStatus = (state: TShipsStore) => state.loading;
+// export const selectStatus = (state: TShipsStore) => state.loading;
 
 export default shipsSlice.reducer;
