@@ -9,8 +9,6 @@ export type TShipsStore = {
   lvls: number[];
 } & TStore;
 
-// TShipTypesResponse
-
 const initialState: TShipsStore = {
   data: null,
   loading: "idle",

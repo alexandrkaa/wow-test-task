@@ -67,7 +67,6 @@ type TProps = {
 };
 
 const MenuList: FC<TProps> = (props) => {
-  console.count(`render`);
   const appData = useAppSelector((state) => state.app);
   const curLang = appData.lang;
 
@@ -113,7 +112,6 @@ const MenuList: FC<TProps> = (props) => {
   const switchMenu = (type: string) => {
     setSecondMenuVisible((state) => {
       if (type === secondMenuType) {
-        // props.hideMenu();
         return !state;
       }
       return true;
@@ -124,11 +122,6 @@ const MenuList: FC<TProps> = (props) => {
   return (
     <>
       <ul key="menu" className="menu__menu-list menu-list">
-        {/* <MenuItem>
-          <a className="menu-list__item-link" href="https://worldofwarships.eu">
-            Official website
-          </a>
-        </MenuItem> */}
         <MenuItem>
           <Button
             onClick={() => switchMenu(SecondMenuTypes.lang)}

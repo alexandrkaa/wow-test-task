@@ -51,6 +51,5 @@ export const nationsSlice = createSlice({
 export const selectNations = (state: TNationsStore): TNations | null => state.data;
 export const selectNation = (state: TNationsStore, nation: string): TNation | undefined =>
   selectNations(state)?.[nation];
-// export const selectStatus = (state: TNationsStore) => state.loading;
 
 export default nationsSlice.reducer;
