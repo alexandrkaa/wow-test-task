@@ -12,7 +12,7 @@ type TProps = {
 };
 
 const Ship: FC<TProps> = ({ ship, size, getShipData, imgClick }) => {
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0,
   });

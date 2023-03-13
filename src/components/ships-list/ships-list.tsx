@@ -13,12 +13,10 @@ import { APP_ELEMENT_ID, ModalCustomStyles } from "../../consts/consts";
 import { TShip, ShipsImgSizes } from "../../types/types";
 import { getShipData, filterShips } from "../../utils/utils";
 import { TShipTypesStore } from "../../store/types-slice";
-import { PAGINATOR_ITEMS_PER_PAGE } from "../../consts/consts";
+import { PAGINATOR_ITEMS_PER_PAGE, ScreenWidth } from "../../consts/consts";
+import { useWindowSize } from "../../utils/hooks";
 
 const ShipsList: FC = () => {
-  //////
-  const [itemOffset, setItemOffset] = useState(0);
-  //////
   // get data
   const ships = useAppSelector((state) => selectShips(state.ships));
   const nations = useAppSelector((state) => selectNations(state.nations));
@@ -35,12 +33,19 @@ const ShipsList: FC = () => {
     nationLoadingStatus === StoreLoading.SUCCEED &&
     typesLoadingStatus === StoreLoading.SUCCEED;
 
+  const [itemOffset, setItemOffset] = useState(0);
+  const windowSize = useWindowSize();
+
   const [modalIsOpen, changeModal] = useState<boolean>(false);
   const [ship, setShip] = useState<TShip | null>(null);
 
   useEffect(() => {
     setItemOffset(0);
   }, [appData.curLevel, appData.curNation, appData.curType]);
+
+  if (windowSize.width && windowSize.width < ScreenWidth.tablet) {
+    ModalCustomStyles.content.maxWidth = `80%`;
+  }
 
   let _renderShips: TShip[] = [];
 
@@ -70,6 +75,8 @@ const ShipsList: FC = () => {
       setItemOffset(newOffset);
     };
 
+    const doShowModal = windowSize.width && windowSize.width > ScreenWidth.mobile;
+
     return (
       <>
         <Modal
@@ -85,7 +92,9 @@ const ShipsList: FC = () => {
           {currentItems.map((ship) => {
             const _showShip = (evt: React.MouseEvent<HTMLElement>) => {
               evt.preventDefault();
-              showShip(ship);
+              if (doShowModal) {
+                showShip(ship);
+              }
             };
             return (
               <li key={ship.id} className="ship-card">
@@ -94,16 +103,19 @@ const ShipsList: FC = () => {
             );
           })}
         </ul>
-        <section className="paginator">
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel=" >> "
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel=" <<"
-          />
-        </section>
+        {_renderShips.length > PAGINATOR_ITEMS_PER_PAGE && (
+          <section className="paginator">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel=" >> "
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel=" <<"
+            />
+          </section>
+        )}
       </>
     );
   }

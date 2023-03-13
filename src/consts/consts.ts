@@ -23,3 +23,8 @@ export const SecondMenuTypes = {
 };
 
 export const PAGINATOR_ITEMS_PER_PAGE = 30;
+
+export const ScreenWidth = {
+  tablet: 1280,
+  mobile: 768,
+};

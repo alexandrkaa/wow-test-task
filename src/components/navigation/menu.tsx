@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, memo } from "react";
 import MenuItem from "./menu-item";
 import { Langs, TNationData, TShipTypeData, TShipTypes } from "../../types/types";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
@@ -62,7 +62,12 @@ const getNations = (nations: TNationData[], setNation: (nation: string) => void)
   ));
 };
 
-const MenuList: FC = () => {
+type TProps = {
+  hideMenu: (cb: () => void) => void;
+};
+
+const MenuList: FC<TProps> = (props) => {
+  console.count(`render`);
   const appData = useAppSelector((state) => state.app);
   const curLang = appData.lang;
 
@@ -81,28 +86,34 @@ const MenuList: FC = () => {
   const [secondMenuType, setSecondMenuType] = useState<string>(SecondMenuTypes.lang);
   const dispatch = useAppDispatch();
 
+  const _hideMenu = (): void => {
+    props.hideMenu(() => setSecondMenuVisible(false));
+  };
+
   const _setLang = (lang: keyof typeof Langs): void => {
     dispatch(setLang(lang));
-    setSecondMenuVisible(false);
+    _hideMenu();
   };
   const _setLevel = (lvl: number): void => {
     dispatch(setLevel(lvl));
-    setSecondMenuVisible(false);
+    _hideMenu();
   };
   const _setNation = (nation: string): void => {
     dispatch(setNation(nation));
-    setSecondMenuVisible(false);
+    _hideMenu();
   };
   const _setType = (type: string): void => {
     dispatch(setType(type));
-    setSecondMenuVisible(false);
+    _hideMenu();
   };
   const _resetFilters = (): void => {
     dispatch(resetAll());
+    _hideMenu();
   };
   const switchMenu = (type: string) => {
     setSecondMenuVisible((state) => {
       if (type === secondMenuType) {
+        // props.hideMenu();
         return !state;
       }
       return true;
@@ -112,7 +123,7 @@ const MenuList: FC = () => {
 
   return (
     <>
-      <ul key="menu" className="menu-list">
+      <ul key="menu" className="menu__menu-list menu-list">
         {/* <MenuItem>
           <a className="menu-list__item-link" href="https://worldofwarships.eu">
             Official website
@@ -146,7 +157,7 @@ const MenuList: FC = () => {
           <Button onClick={_resetFilters} className="link menu-list__item-link" title="Reset filters" />
         </MenuItem>
       </ul>
-      <ul key="langs" className={`menu-list ${!secondMenuVisible ? `visually-hidden` : ``}`}>
+      <ul key="langs" className={`menu__menu-list menu-list ${!secondMenuVisible ? `visually-hidden` : ``}`}>
         {secondMenuVisible && secondMenuType === SecondMenuTypes.lang && getLangsMenu(_setLang)}
         {secondMenuVisible && secondMenuType === SecondMenuTypes.lvl && getLvlsMenu(lvls, _setLevel)}
         {secondMenuVisible && secondMenuType === SecondMenuTypes.types && getTypesMenu(mappedTypes, _setType)}
@@ -156,4 +167,4 @@ const MenuList: FC = () => {
   );
 };
 
-export default MenuList;
+export default memo(MenuList);

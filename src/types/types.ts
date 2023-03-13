@@ -158,3 +158,8 @@ export const isFullShipType = (type: string | TShipTypeData | undefined): type i
   if (typeof type === `string`) return false;
   return true;
 };
+
+export type TWindowSize = {
+  width: number | undefined;
+  height: number | undefined;
+};

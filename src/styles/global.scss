@@ -73,6 +73,12 @@ strong {
     padding: 0;
     margin: 0;
 
+    @media (max-width: 768px) {
+      justify-content: space-around;
+      font-size: 40px;
+      font-weight: 700;
+    }
+
     li {
       min-width: 30px;
       display: flex;
@@ -80,6 +86,15 @@ strong {
       justify-content: center;
       align-items: center;
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        display: none;
+
+        &.previous,
+        &.next {
+          display: block;
+        }
+      }
 
       &.selected {
         font-weight: 700;
